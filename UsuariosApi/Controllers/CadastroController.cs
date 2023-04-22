@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentResults;
+using Microsoft.AspNetCore.Mvc;
 using UsuariosApi.Data.Dtos;
 using UsuariosApi.Services;
-using FluentResults;
 
 namespace UsuariosApi.Controllers
 {
@@ -16,11 +16,11 @@ namespace UsuariosApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateUser([FromBody]CreateUserDto createDto)
+        public IActionResult CreateUser([FromBody] CreateUserDto createDto)
         {
             Result resultado = _cadastroService.CadastraUsuario(createDto);
             if (resultado.IsFailed) return StatusCode(500);
-            
+
             return Ok();
         }
     }

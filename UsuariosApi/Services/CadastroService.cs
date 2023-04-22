@@ -14,7 +14,7 @@ namespace UsuariosApi.Services
         public CadastroService(IMapper mapper, UserManager<IdentityUser<int>> userManager)
         {
             _mapper = mapper;
-            _userManager = userManager; 
+            _userManager = userManager;
         }
 
         public Result CadastraUsuario(CreateUserDto createDto)

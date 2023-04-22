@@ -1,16 +1,8 @@
-﻿
-using AutoMapper;
-using FilmesApi.Data;
-using FilmesApi.Services;
-using FilmesAPI.Data;
+﻿using FilmesApi.Services;
 using FilmesAPI.Data.Dtos;
-using FilmesAPI.Models;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FilmesAPI.Controllers
 {
@@ -46,7 +38,7 @@ namespace FilmesAPI.Controllers
             ReadFilmeDto readDto = _filmeService.RecuperaFilmesPorId(id);
             if (readDto == null) return NotFound();
             return Ok(readDto);
-            
+
         }
 
         [HttpPut("{id}")]
