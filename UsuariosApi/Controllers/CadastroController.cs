@@ -1,14 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UsuariosApi.Data.Dtos;
+using UsuariosApi.Services;
+using FluentResults;
 
 namespace UsuariosApi.Controllers
 {
     [Route("[controller]")]
     public class CadastroController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult CreateUser(CreateUserDto createDto)
+        private CadastroService _cadastroService;
+
+        public CadastroController(CadastroService cadastroService)
         {
+            _cadastroService = cadastroService;
+        }
+
+        [HttpPost]
+        public IActionResult CreateUser([FromBody]CreateUserDto createDto)
+        {
+            Result resultado = _cadastroService.CadastraUsuario(createDto);
+            if (resultado.IsFailed) return StatusCode(500);
+            
             return Ok();
         }
     }
