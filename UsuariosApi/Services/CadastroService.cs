@@ -3,6 +3,7 @@ using FluentResults;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using UsuariosApi.Data.Dtos;
 using UsuariosApi.Data.Requests;
 using UsuariosApi.Models;
@@ -35,8 +36,9 @@ namespace UsuariosApi.Services
             if (resultadoIdentity.Result.Succeeded)
             {
                 var code = _userManager.GenerateEmailConfirmationTokenAsync(usuarioidentity).Result;
+                var encodedCode = HttpUtility.UrlEncode(code);
 
-                _emailService.EnviarEmail(new[] { usuarioidentity.Email }, "Link de ativação", usuarioidentity.Id, code);
+                _emailService.EnviarEmail(new[] { usuarioidentity.Email }, "Link de ativação", usuarioidentity.Id, encodedCode);
 
                 return Result.Ok().WithSuccess(code);
             }
