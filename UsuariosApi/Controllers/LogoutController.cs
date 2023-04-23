@@ -6,19 +6,19 @@ using UsuariosApi.Services;
 namespace UsuariosApi.Controllers
 {
     [Route("[controller]")]
-    public class LoginController : ControllerBase
+    public class LogoutController : ControllerBase
     {
-        private LoginService _loginService;
+        private LogoutService _logoutService;
 
-        public LoginController(LoginService loginService)
+        public LogoutController(LogoutService logoutService)
         {
-            _loginService = loginService;
+            _logoutService = logoutService;
         }
 
         [HttpPost]
-        public IActionResult LogaUsuario([FromBody] LoginRequest request)
+        public IActionResult DeslogaUsuario()
         {
-            Result resultado = _loginService.LogaUsuario(request);
+            Result resultado = _logoutService.DeslogaUsuario();
             if (resultado.IsFailed) return Unauthorized(resultado.Errors);
 
             return Ok(resultado.Successes);
